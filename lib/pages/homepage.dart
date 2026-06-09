@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'UserListPage.dart'; // Import halaman daftar user
 
 class HomePage extends StatelessWidget {
   final String username;
@@ -42,11 +43,7 @@ class HomePage extends StatelessWidget {
                           color: Colors.white.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 40,
-                        ),
+                        child: const Icon(Icons.person, color: Colors.white, size: 40),
                       ),
                       const SizedBox(width: 20),
                       Expanded(
@@ -87,6 +84,21 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   children: [
+                    /// DAFTAR USER
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const UserListPage()),
+                        );
+                      },
+                      child: menuCard(
+                        icon: Icons.people,
+                        title: "Daftar User",
+                        color: Colors.blue,
+                      ),
+                    ),
+                    /// LOGOUT
                     GestureDetector(
                       onTap: () {
                         showDialog(
@@ -97,19 +109,14 @@ class HomePage extends StatelessWidget {
                               content: const Text("Yakin ingin logout?"),
                               actions: [
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
+                                  onPressed: () => Navigator.pop(context),
                                   child: const Text("Batal"),
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushNamedAndRemoveUntil(
-                                      context, '/', (route) => false);
+                                    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red,
-                                  ),
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                                   child: const Text("Logout"),
                                 ),
                               ],
@@ -158,10 +165,7 @@ class HomePage extends StatelessWidget {
             child: Icon(icon, color: color, size: 35),
           ),
           const SizedBox(height: 15),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
+          Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
         ],
       ),
     );
